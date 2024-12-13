@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export default function middleware(request: NextRequest) {
   // TODO:JWT 验证
-  console.log(request.nextUrl)
   console.log('see me？')
-  return NextResponse.json({ name: 'hello middleware' })
+  return NextResponse.next()
 }
 
 export const config = {
