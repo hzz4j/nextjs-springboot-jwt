@@ -1,7 +1,7 @@
 export default function App() {
   return (
     <>
-      <section className='container relative mx-auto flex text-red-400'>git all</section>
+      <section className='container relative mx-auto flex text-red-400'>{slogan}</section>
     </>
   )
 }
