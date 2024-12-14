@@ -5,13 +5,17 @@ export const slogan = process.env.SLOGAN
 // 编码为 UTF-8 格式的字节数据，适合网络传输或存储
 const encodedKey = new TextEncoder().encode(process.env.JWT_SECRET)
 
+type Payload = {
+  [p in keyof any]?: string
+}
+
 /**
  * JWT的编码在服务端springboot做
  * @param msg
  * @returns
  */
-export async function createSessionToken(msg: string) {
-  return new SignJWT({ msg }).setProtectedHeader({ alg: 'HS256' }).sign(encodedKey)
+export async function createSessionToken(payload: Payload) {
+  return new SignJWT(payload).setProtectedHeader({ alg: 'HS256', typ: 'JWT' }).sign(encodedKey)
 }
 
 /**
@@ -27,5 +31,6 @@ export async function verifySessionToken(token: string) {
     return payload
   } catch (error) {
     console.log('Failed to verify session')
+    throw error
   }
 }

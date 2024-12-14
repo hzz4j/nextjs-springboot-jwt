@@ -1,9 +1,9 @@
 import { createSessionToken, verifySessionToken } from '@/lib/session'
 
 export default async function App() {
-  const jwtToken = await createSessionToken('Love React with next.js')
+  const jwtToken = await createSessionToken({ msg: 'Hello World', name: 'Pkmer' })
   const payload = await verifySessionToken(
-    'eyJhbGciOiJIUzI1NiJ9.eyJtc2ciOiJHb29kIEV2ZW5pbmcifQ.MwnyLu_pkFSez3pyFRPbGAex72NxrcX6nnqwzWvlr2I'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtc2ciOiJIZWxsbyBXb3JsZCIsIm5hbWUiOiJQa21lciJ9.zbcgjvNH_sQHxkhR2k_GO0FIJIOHr49RE5FHqs4NcMk'
   )
   console.log(payload)
 
