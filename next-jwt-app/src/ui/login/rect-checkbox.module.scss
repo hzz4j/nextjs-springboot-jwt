@@ -1,8 +1,8 @@
-@import '@/ui/_variables.scss';
+@import '@/styles/_variables.scss';
 
+$stroke-width: 5;
 :export {
   strokeWidth: $stroke-width;
-  width: $width;
   mainColor: $main-color;
   duration: $duration;
 }
@@ -15,7 +15,6 @@
   position: relative;
   display: block;
   height: 24px;
-  width: $width;
   border-radius: 6px;
   background-color: $main-color;
 
