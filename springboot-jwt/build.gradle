@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+    alias(libs.plugins.org.springframework.boot)
+}
+apply plugin: 'io.spring.dependency-management'
+
+group = 'io.gitee'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

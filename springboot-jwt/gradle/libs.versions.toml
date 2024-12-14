@@ -1,0 +1,6 @@
+[versions]
+org-springframework-boot="3.4.0"
+
+
+[plugins]
+org-springframework-boot={id = "org.springframework.boot",version.ref = "org-springframework-boot"}
