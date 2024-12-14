@@ -1,5 +1,8 @@
 package io.gitee;
 
+import io.gitee.config.JWTProps;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class Application {
+
+    @Setter(onMethod_ = @Autowired)
+    private JWTProps jwtProps;
+
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Application.class);
         app.run(args);
@@ -21,6 +28,6 @@ public class Application {
 
     @GetMapping("/helloworld")
     public String hello() {
-        return "Hello World!";
+        return jwtProps.getSecret();
     }
 }
