@@ -15,7 +15,7 @@ type Payload = {
  * @returns
  */
 export async function createSessionToken(payload: Payload) {
-  return new SignJWT(payload).setProtectedHeader({ alg: 'HS256', typ: 'JWT' }).sign(encodedKey)
+  return new SignJWT(payload).setProtectedHeader({ typ: 'JWT', alg: 'HS256' }).sign(encodedKey)
 }
 
 /**
