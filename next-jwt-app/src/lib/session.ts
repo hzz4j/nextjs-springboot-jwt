@@ -30,7 +30,7 @@ export async function verifySessionToken(token: string) {
     })
     return payload
   } catch (error) {
-    console.log('Failed to verify session')
+    console.error('Failed to verify session')
     throw error
   }
 }
