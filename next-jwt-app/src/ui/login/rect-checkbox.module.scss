@@ -1,0 +1,32 @@
+@import '@/ui/_variables.scss';
+
+:export {
+  strokeWidth: $stroke-width;
+  width: $width;
+  mainColor: $main-color;
+  duration: $duration;
+}
+
+.checkbox {
+  display: none;
+}
+
+.label {
+  position: relative;
+  display: block;
+  height: 24px;
+  width: $width;
+  border-radius: 6px;
+  background-color: $main-color;
+
+  div {
+    padding: 0.5rem;
+    width: fit-content;
+    position: absolute;
+    top: 50%;
+    transform-origin: center;
+    background-color: black;
+    border-radius: 100%;
+    transition: all $duration ease-in-out;
+  }
+}
