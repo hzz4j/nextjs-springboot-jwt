@@ -1,23 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
-import { verifySessionToken } from '@/lib/session'
+import { verifySessionToken } from '@/lib/jwt'
 
-const publicPaths = ['/login']
+const publicPaths = ['/login', '/introduce']
 
 export default async function middleware(request: NextRequest) {
-  if (publicPaths.includes(request.nextUrl.pathname)) {
-    return NextResponse.next()
-  }
+  const isPublicPath = publicPaths.includes(request.nextUrl.pathname)
   const token = (await cookies()).get('session')?.value
-  let payload: any = null
+
   if (token) {
+    // 处理登录过的用户
     try {
-      payload = await verifySessionToken(token)
+      await verifySessionToken(token)
+
+      if (request.nextUrl.pathname === '/login') {
+        // 如果用户已经登录，再次访问登录页面，直接调到首页
+        return NextResponse.redirect(new URL('/', request.nextUrl))
+      }
+
+      return NextResponse.next()
     } catch (e) {
       return NextResponse.redirect(new URL('/login', request.nextUrl))
     }
   } else {
-    return NextResponse.redirect(new URL('/login', request.nextUrl))
+    // 处理未登录的用户
+    if (isPublicPath) {
+      // 公共页面
+      return NextResponse.next()
+    } else {
+      // 访问受保护的页面，让用户去登录
+      return NextResponse.redirect(new URL('/login', request.nextUrl))
+    }
   }
 }
 

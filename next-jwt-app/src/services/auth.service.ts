@@ -17,7 +17,6 @@ class AuthService {
       email,
       password
     })
-    console.log(`注册成功: => `, msg)
   }
 
   async login(email: string, password: string) {
@@ -25,7 +24,6 @@ class AuthService {
       email,
       password
     })
-    console.log(res.data)
     return res.data.token as string
   }
 }
