@@ -3,12 +3,14 @@ import { ArrowUpLeftIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import rectCheckbox from './rect-checkbox.module.scss'
 import { useState } from 'react'
+import { noop } from '@/utils/helper'
 
 interface Props {
   width?: number // default 60
+  onChange?: (checked: boolean) => void // 暴露状态变化
 }
 
-const RectCheckbox: React.FC<Props> = ({ width = 60 }) => {
+const RectCheckbox: React.FC<Props> = ({ width = 60, onChange = noop }) => {
   const [checked, setChecked] = useState(false)
 
   const ballStyle = checked
@@ -20,7 +22,8 @@ const RectCheckbox: React.FC<Props> = ({ width = 60 }) => {
       } satisfies React.CSSProperties)
 
   function handleChecked(e: React.ChangeEvent<HTMLInputElement>) {
-    setChecked(e.target.checked)
+    const checked = e.target.checked
+    setChecked(checked), onChange(checked)
   }
 
   return (
