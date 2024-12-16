@@ -1,5 +1,7 @@
 import { LockClosedIcon, AtSymbolIcon, UserIcon } from '@heroicons/react/24/solid'
 import style from './form.module.scss'
+import { registerUser } from '@/lib/actions'
+import { useActionState } from 'react'
 export const LoginForm: React.FC = () => {
   return (
     <>
@@ -13,7 +15,7 @@ export const LoginForm: React.FC = () => {
           登录
         </h1>
         <div className='relative'>
-          <input type='text' placeholder='Your Email' className={style.Input} />
+          <input type='text' name='email' placeholder='Your Email' className={style.Input} />
           <AtSymbolIcon
             style={{
               color: style.mainColor
@@ -23,7 +25,7 @@ export const LoginForm: React.FC = () => {
         </div>
 
         <div className='relative'>
-          <input type='password' placeholder='Your Password' className={style.Input} />
+          <input type='password' name='password' placeholder='Your Password' className={style.Input} />
           <LockClosedIcon
             style={{
               color: style.mainColor
@@ -48,9 +50,11 @@ export const LoginForm: React.FC = () => {
 }
 
 export const SignUpForm: React.FC = () => {
+  const [_state, formActive] = useActionState(registerUser, {})
+  console.log({ _state })
   return (
     <>
-      <form className='space-y-4 rounded-lg bg-gray-100 p-10'>
+      <form action={formActive} className='space-y-4 rounded-lg bg-gray-100 p-10'>
         <h1
           style={{
             color: style.mainColor
@@ -61,7 +65,7 @@ export const SignUpForm: React.FC = () => {
         </h1>
 
         <div className='relative'>
-          <input type='text' placeholder='Your Full Name' className={style.Input} />
+          <input type='text' name='username' placeholder='Your Full Name' className={style.Input} />
           <UserIcon
             style={{
               color: style.mainColor
@@ -71,7 +75,7 @@ export const SignUpForm: React.FC = () => {
         </div>
 
         <div className='relative'>
-          <input type='text' placeholder='Your Email' className={style.Input} />
+          <input type='text' name='email' placeholder='Your Email' className={style.Input} />
           <AtSymbolIcon
             style={{
               color: style.mainColor
@@ -81,7 +85,7 @@ export const SignUpForm: React.FC = () => {
         </div>
 
         <div className='relative'>
-          <input type='password' placeholder='Your Password' className={style.Input} />
+          <input type='password' name='password' placeholder='Your Password' className={style.Input} />
           <LockClosedIcon
             style={{
               color: style.mainColor

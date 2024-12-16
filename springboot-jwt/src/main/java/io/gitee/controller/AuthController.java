@@ -20,8 +20,8 @@ import java.util.Optional;
  * At 2024/12/16
  */
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/auth")
+public class AuthController {
     @Setter(onMethod_ = @Autowired)
     UserService userService;
 
@@ -30,6 +30,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public Object signUp(@RequestBody UserSignUp userSignUp){
+
         userService.register(userSignUp);
         return "success";
     }

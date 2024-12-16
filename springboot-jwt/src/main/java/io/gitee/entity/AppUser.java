@@ -1,8 +1,6 @@
 package io.gitee.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -14,11 +12,16 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
+@Entity
 @Table(name = "app_user")
 public class AppUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column
     private String name;
+    @Column
     private String email;
+    @Column
     private String password;
 }

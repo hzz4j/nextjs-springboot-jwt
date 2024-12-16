@@ -11,8 +11,16 @@ spring:
     url: jdbc:h2:mem:testdb
     username: sa
     password: sa
+    driver-class-name: org.h2.Driver
   sql:
     init:
       mode: always
       data-locations: classpath*:sql/data.sql
       schema-locations: classpath*:sql/schema.sql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none # 使用jdbc的schema.sql
+    properties:
+      hibernate:
+        format_sql: true
