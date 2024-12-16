@@ -40,6 +40,6 @@ public class JWTService {
         // jwt.io也要模仿这个行为，直接使用原始字符串或者对进行base64操作
         // 直接使用原始字符串密钥
         byte[] rawKey = jwtSecret.getBytes(StandardCharsets.UTF_8);
-        return Keys.hmacShaKeyFor(rawKey);;
+        return Keys.hmacShaKeyFor(rawKey);
     }
 }
