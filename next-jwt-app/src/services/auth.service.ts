@@ -21,10 +21,12 @@ class AuthService {
   }
 
   async login(email: string, password: string) {
-    return this.instance.post('/auth/login', {
+    const res = await this.instance.post('/auth/login', {
       email,
       password
     })
+    console.log(res.data)
+    return res.data.token as string
   }
 }
 

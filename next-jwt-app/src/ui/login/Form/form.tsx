@@ -1,11 +1,12 @@
 import { LockClosedIcon, AtSymbolIcon, UserIcon } from '@heroicons/react/24/solid'
 import style from './form.module.scss'
-import { registerUser } from '@/lib/actions'
+import { registerUser, login } from '@/lib/actions'
 import { useActionState } from 'react'
 export const LoginForm: React.FC = () => {
+  const [_state, formActive] = useActionState(login, {})
   return (
     <>
-      <form className='space-y-4 rounded-lg bg-gray-600 p-10'>
+      <form action={formActive} className='space-y-4 rounded-lg bg-gray-600 p-10'>
         <h1
           style={{
             color: style.mainColor

@@ -19,6 +19,13 @@ type State = {
   }
   message?: string
 }
+
+/**
+ * 注册
+ * @param _preState
+ * @param formData
+ * @returns
+ */
 export async function registerUser(_preState: State, formData: FormData) {
   const rawFormData = Object.fromEntries(formData)
   const validateFields = FormScheme.safeParse(rawFormData)
@@ -37,6 +44,27 @@ export async function registerUser(_preState: State, formData: FormData) {
     return { message: '注册失败' } satisfies State
   }
 
+  redirect('/')
+  return {} as State
+}
+
+export async function login(_preState: State, formData: FormData) {
+  const rawFormData = Object.fromEntries(formData)
+  const validateFields = LoginForm.safeParse(rawFormData)
+  if (!validateFields.success) {
+    return {
+      errors: validateFields.error.flatten().fieldErrors
+    } satisfies State
+  }
+
+  const { password, email } = validateFields.data
+  try {
+    const token = await authService.login(email, password)
+    console.log({ token })
+  } catch (e) {
+    console.error(e)
+    return { message: '登录失败' } satisfies State
+  }
   redirect('/')
   return {} as State
 }
