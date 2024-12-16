@@ -11,7 +11,7 @@ interface Props {
 }
 
 const RectCheckbox: React.FC<Props> = ({ width = 60, onChange = noop }) => {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(true)
 
   const ballStyle = checked
     ? ({

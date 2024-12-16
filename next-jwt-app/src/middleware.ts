@@ -2,14 +2,23 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import { verifySessionToken } from '@/lib/session'
 
+const publicPaths = ['/login']
+
 export default async function middleware(request: NextRequest) {
+  if (publicPaths.includes(request.nextUrl.pathname)) {
+    return NextResponse.next()
+  }
   const token = (await cookies()).get('session')?.value
   let payload: any = null
   if (token) {
-    payload = await verifySessionToken(token)
+    try {
+      payload = await verifySessionToken(token)
+    } catch (e) {
+      return NextResponse.redirect(new URL('/login', request.nextUrl))
+    }
+  } else {
+    return NextResponse.redirect(new URL('/login', request.nextUrl))
   }
-
-  return NextResponse.next()
 }
 
 export const config = {
