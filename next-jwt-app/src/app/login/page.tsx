@@ -23,19 +23,21 @@ export default function Page() {
     <section className='flex flex-col items-center justify-center gap-6 overflow-hidden'>
       <ul className='flex gap-[80px]'>
         <li
-          style={liStyle}
-          className={clsx('text-xl font-bold text-gray-300', {
-            '!text-black': isLogin
-          })}
+          style={{
+            ...liStyle,
+            color: isLogin ? style.mainColor : ''
+          }}
+          className='text-xl font-bold text-gray-300'
         >
           登录
         </li>
 
         <li
-          style={liStyle}
-          className={clsx('text-xl font-bold text-gray-300', {
-            '!text-black': isSignUp
-          })}
+          style={{
+            ...liStyle,
+            color: isSignUp ? style.mainColor : ''
+          }}
+          className='text-xl font-bold text-gray-300'
         >
           注册
         </li>
