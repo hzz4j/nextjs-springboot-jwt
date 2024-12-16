@@ -2,7 +2,8 @@
 import { useState } from 'react'
 import clsx from 'clsx'
 import RectCheckbox from '@/ui/login/rect-checkbox'
-import styleVariable from './page.module.scss'
+import { LoginForm, SignUpForm } from '@/ui/login/Form/form'
+import style from './page.module.scss'
 
 export default function Page() {
   const [isChecked, setChecked] = useState(true)
@@ -15,11 +16,11 @@ export default function Page() {
   }
 
   const liStyle = {
-    transition: `color ${styleVariable.duration} ease-in-out`
+    transition: `color ${style.duration} ease-in-out`
   } satisfies React.CSSProperties
 
   return (
-    <section className='flex flex-col items-center justify-center gap-6'>
+    <section className='flex flex-col items-center justify-center gap-6 overflow-hidden'>
       <ul className='flex gap-[80px]'>
         <li
           style={liStyle}
@@ -40,6 +41,22 @@ export default function Page() {
         </li>
       </ul>
       <RectCheckbox width={60} onChange={handleOnChange} />
+
+      <div className={style.cardContainer}>
+        <div
+          style={{
+            transform: isChecked ? 'rotateY(0deg)' : 'rotateY(180deg)'
+          }}
+          className={style.cardWrapper}
+        >
+          <div>
+            <LoginForm />
+          </div>
+          <div>
+            <SignUpForm />
+          </div>
+        </div>
+      </div>
     </section>
   )
 }

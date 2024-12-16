@@ -3,3 +3,30 @@
 :export {
   duration: $duration;
 }
+
+.cardContainer {
+  width: 300px;
+  height: 500px;
+  perspective: 600px;
+  transform-style: preserve-3d;
+}
+
+.cardWrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  // 旋转这里，保持子元素的3d效果
+  transform-style: preserve-3d;
+  transition: all $duration ease-in-out;
+
+  > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+
+    &:nth-of-type(2) {
+      transform: rotateY(180deg);
+    }
+  }
+}
