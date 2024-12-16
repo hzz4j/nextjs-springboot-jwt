@@ -1,4 +1,5 @@
 import 'server-only'
+import { cookies } from 'next/headers'
 import { SignJWT, jwtVerify } from 'jose'
 export const slogan = process.env.SLOGAN
 
@@ -33,4 +34,12 @@ export async function verifySessionToken(token: string) {
     console.error('Failed to verify session')
     throw error
   }
+}
+
+export async function createSession(token: string) {
+  const cookieStore = await cookies()
+  cookieStore.set('session', token, {
+    httpOnly: true,
+    path: '/'
+  })
 }

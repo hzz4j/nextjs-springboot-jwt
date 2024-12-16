@@ -2,6 +2,7 @@
 import { authService } from '@/services'
 import z from 'zod'
 import { redirect } from 'next/navigation'
+import { createSession } from '@/lib/session'
 
 const FormScheme = z.object({
   username: z.string().min(1, { message: 'Username is required' }),
@@ -60,7 +61,7 @@ export async function login(_preState: State, formData: FormData) {
   const { password, email } = validateFields.data
   try {
     const token = await authService.login(email, password)
-    console.log({ token })
+    createSession(token)
   } catch (e) {
     console.error(e)
     return { message: '登录失败' } satisfies State

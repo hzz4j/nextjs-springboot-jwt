@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
+import { verifySessionToken } from '@/lib/session'
 
-export default function middleware(request: NextRequest) {
-  // TODO:JWT 验证
-  console.log('see me？')
+export default async function middleware(request: NextRequest) {
+  const token = (await cookies()).get('session')?.value
+  let payload: any = null
+  if (token) {
+    payload = await verifySessionToken(token)
+  }
+
   return NextResponse.next()
 }
 
