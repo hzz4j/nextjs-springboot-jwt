@@ -2,11 +2,16 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import { verifySessionToken } from '@/lib/jwt'
 
+// 放行的路由，白名单
 const publicPaths = ['/login', '/introduce']
 
 export default async function middleware(request: NextRequest) {
   const isPublicPath = publicPaths.includes(request.nextUrl.pathname)
   const token = (await cookies()).get('session')?.value
+  if (isPublicPath) {
+    // 公共页面
+    return NextResponse.next()
+  }
 
   if (token) {
     // 处理登录过的用户

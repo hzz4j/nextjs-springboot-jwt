@@ -20,4 +20,5 @@ public class JWTProps {
      * jwt secret
      */
     private String secret;
+    private long expiration;
 }

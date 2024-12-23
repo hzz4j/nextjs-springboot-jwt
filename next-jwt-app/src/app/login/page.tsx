@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import clsx from 'clsx'
 import RectCheckbox from '@/ui/login/rect-checkbox'
 import { LoginForm, SignUpForm } from '@/ui/login/Form/form'
 import style from './page.module.scss'

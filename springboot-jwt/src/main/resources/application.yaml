@@ -3,6 +3,7 @@
 
 jwt:
   secret: "9cZjXN9uHH0erCgOAdZCsXIAJbeh7Q43eLa/c1a69rU="
+  expiration: 60_000
 spring:
   h2:
     console:

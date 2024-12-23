@@ -61,9 +61,10 @@ export async function login(_preState: State, formData: FormData) {
   const { password, email } = validateFields.data
   try {
     const token = await authService.login(email, password)
+    console.log({ token })
     createSession(token)
   } catch (e) {
-    console.error(e)
+    // console.error(e)
     return { message: '登录失败' } satisfies State
   }
   redirect('/')

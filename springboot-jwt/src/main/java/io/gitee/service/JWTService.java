@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -19,11 +21,14 @@ import java.util.Map;
 @Service
 public class JWTService {
     private final String jwtSecret;
+    private long expiration;
     public JWTService(JWTProps props){
         jwtSecret = props.getSecret();
+        expiration = props.getExpiration();
     }
 
     public String getToken(String username) {
+
         Map<String, ?> claims = Map.of(
                 "loginDate", LocalDate.now().toString(),
                 "usename", username);
@@ -31,6 +36,7 @@ public class JWTService {
                 .header()
                 .type("JWT").and()
                 .claims(claims)
+                .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSecretKey())
                 .compact();
 
